@@ -11,8 +11,35 @@ const rowForEmail = document.getElementById('emailDivRow');
 
 const buttonNewMail = document.getElementById('buttonstampnewmail');
 
-//Event
+const tableMail = document.getElementById('tablemail');
 
+let countingMail = 0;
+
+//Event Click
+
+buttonNewMail.addEventListener('click', function () {
+  tableMail.innerHTML = ``;
+  countingMail = 0;
+
+  for (let i = 0; i < 10; i++) {
+    axios
+      .get('https://flynn.boolean.careers/exercises/api/random/mail')
+      .then((response) => {
+        const randomMail = response.data.response;
+
+        countingMail++;
+
+        tableMail.innerHTML += `<tr>
+          <th scope="row">${countingMail}</th>
+          <td>${randomMail}</td>
+        </tr>`;
+
+        console.log(randomMail);
+      });
+  }
+});
+
+/*
 buttonNewMail.addEventListener('click', function () {
   rowForEmail.innerHTML = ``;
 
@@ -29,8 +56,28 @@ buttonNewMail.addEventListener('click', function () {
       });
   }
 });
+*/
 
 //Axios Call in For Cicle
+
+for (let i = 0; i < 10; i++) {
+  axios
+    .get('https://flynn.boolean.careers/exercises/api/random/mail')
+    .then((response) => {
+      const randomMail = response.data.response;
+
+      countingMail++;
+
+      tableMail.innerHTML += `<tr>
+          <th scope="row">${countingMail}</th>
+          <td>${randomMail}</td>
+        </tr>`;
+
+      console.log(randomMail);
+    });
+}
+
+/*
 for (let i = 0; i < 10; i++) {
   axios
     .get('https://flynn.boolean.careers/exercises/api/random/mail')
@@ -43,3 +90,4 @@ for (let i = 0; i < 10; i++) {
       console.log(randomMail);
     });
 }
+*/
