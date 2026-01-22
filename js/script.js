@@ -13,13 +13,23 @@ const buttonNewMail = document.getElementById('buttonstampnewmail');
 
 const tableMail = document.getElementById('tablemail');
 
+const alertWaiting = document.getElementById('waitingforgenerate');
+
+// Mail counter for table
 let countingMail = 0;
+
+//Alert Gestione
+alertWaiting.classList.remove('d-none');
+
+let remaining = 10;
 
 //Event Click
 
 buttonNewMail.addEventListener('click', function () {
   tableMail.innerHTML = ``;
   countingMail = 0;
+  remaining = 10;
+  alertWaiting.classList.remove('d-none');
 
   for (let i = 0; i < 10; i++) {
     axios
@@ -33,8 +43,14 @@ buttonNewMail.addEventListener('click', function () {
           <th scope="row">${countingMail}</th>
           <td>${randomMail}</td>
         </tr>`;
+      })
 
-        console.log(randomMail);
+      .finally(() => {
+        remaining--;
+
+        if (remaining === 0) {
+          alertWaiting.classList.add('d-none');
+        }
       });
   }
 });
@@ -72,8 +88,14 @@ for (let i = 0; i < 10; i++) {
           <th scope="row">${countingMail}</th>
           <td>${randomMail}</td>
         </tr>`;
+    })
 
-      console.log(randomMail);
+    .finally(() => {
+      remaining--;
+
+      if (remaining === 0) {
+        alertWaiting.classList.add('d-none');
+      }
     });
 }
 
