@@ -7,12 +7,14 @@ Inserire un bottone che al click faccia il fetch altre 10 mail (sostituendo le a
 Buon Lavoro*/
 
 //Axios Call
+const rowForEmail = document.getElementById('emailDivRow');
 
 for (let i = 0; i < 10; i++) {
   axios
     .get('https://flynn.boolean.careers/exercises/api/random/mail')
     .then((response) => {
       const randomMail = response.data.response;
+
       console.log(randomMail);
     });
 }
