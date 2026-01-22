@@ -15,6 +15,9 @@ for (let i = 0; i < 10; i++) {
     .then((response) => {
       const randomMail = response.data.response;
 
+      rowForEmail.innerHTML += `<div class="col">
+          <h2 class="fs-200">${randomMail}</h2>`;
+
       console.log(randomMail);
     });
 }
