@@ -20,11 +20,10 @@ let countingMail = 0;
 
 //Alert Gestione
 alertWaiting.classList.remove('d-none');
-
+//Counter per far rimuovere o aggiungere il loader
 let remaining = 10;
 
 //Event Click
-
 buttonNewMail.addEventListener('click', function () {
   tableMail.innerHTML = ``;
   countingMail = 0;
@@ -75,7 +74,6 @@ buttonNewMail.addEventListener('click', function () {
 */
 
 //Axios Call in For Cicle
-
 for (let i = 0; i < 10; i++) {
   axios
     .get('https://flynn.boolean.careers/exercises/api/random/mail')
