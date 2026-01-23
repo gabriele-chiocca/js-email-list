@@ -42,6 +42,7 @@ buttonNewMail.addEventListener('click', function () {
   alertWaiting.classList.remove('d-none');
   receivedEmails.length = 0;
   containerHtml = '';
+  buttonNewMail.disabled = true;
 
   //Ciclo For
 
@@ -69,6 +70,7 @@ buttonNewMail.addEventListener('click', function () {
 
         if (remaining === 0) {
           alertWaiting.classList.add('d-none');
+          buttonNewMail.disabled = false;
         }
       });
   }
