@@ -35,12 +35,15 @@ let containerHtml = '';
 
 //Event Click
 buttonNewMail.addEventListener('click', function () {
+  //Reset dei dati
   tableMail.innerHTML = ``;
   countingMail = 0;
   remaining = 10;
   alertWaiting.classList.remove('d-none');
   receivedEmails.length = 0;
   containerHtml = '';
+
+  //Ciclo For
 
   for (let i = 0; i < numberOfMails; i++) {
     axios
