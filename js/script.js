@@ -33,8 +33,14 @@ const receivedEmails = [];
 
 let containerHtml = '';
 
+// Control on Fetching
+
+let isEmailFetching = false;
+
 //Event Click
 buttonNewMail.addEventListener('click', function () {
+  if (isEmailFetching) return;
+
   //Reset dei dati
   tableMail.innerHTML = ``;
   countingMail = 0;
@@ -43,6 +49,7 @@ buttonNewMail.addEventListener('click', function () {
   receivedEmails.length = 0;
   containerHtml = '';
   buttonNewMail.disabled = true;
+  isEmailFetching = true;
 
   //Ciclo For
 
@@ -71,6 +78,7 @@ buttonNewMail.addEventListener('click', function () {
         if (remaining === 0) {
           alertWaiting.classList.add('d-none');
           buttonNewMail.disabled = false;
+          isEmailFetching = false;
         }
       });
   }
