@@ -15,6 +15,8 @@ const tableMail = document.getElementById('tablemail');
 
 const alertWaiting = document.getElementById('waitingforgenerate');
 
+const numberOfMails = 10;
+
 // Mail counter for table
 let countingMail = 0;
 
@@ -23,25 +25,40 @@ alertWaiting.classList.remove('d-none');
 //Counter per far rimuovere o aggiungere il loader
 let remaining = 10;
 
+//Number Mail Array
+
+const receivedEmails = [];
+
+//Container HTML
+
+let containerHtml = '';
+
 //Event Click
 buttonNewMail.addEventListener('click', function () {
   tableMail.innerHTML = ``;
   countingMail = 0;
   remaining = 10;
   alertWaiting.classList.remove('d-none');
+  receivedEmails.length = 0;
+  containerHtml = '';
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < numberOfMails; i++) {
     axios
       .get('https://flynn.boolean.careers/exercises/api/random/mail')
       .then((response) => {
         const randomMail = response.data.response;
+        receivedEmails.push(randomMail);
 
         countingMail++;
 
-        tableMail.innerHTML += `<tr>
+        containerHtml += `<tr>
           <th scope="row">${countingMail}</th>
           <td>${randomMail}</td>
         </tr>`;
+
+        if (receivedEmails.length === numberOfMails) {
+          tableMail.innerHTML = containerHtml;
+        }
       })
 
       .finally(() => {
@@ -74,18 +91,24 @@ buttonNewMail.addEventListener('click', function () {
 */
 
 //Axios Call in For Cicle
-for (let i = 0; i < 10; i++) {
+
+for (let i = 0; i < numberOfMails; i++) {
   axios
     .get('https://flynn.boolean.careers/exercises/api/random/mail')
     .then((response) => {
       const randomMail = response.data.response;
+      receivedEmails.push(randomMail);
 
       countingMail++;
 
-      tableMail.innerHTML += `<tr>
+      containerHtml += `<tr>
           <th scope="row">${countingMail}</th>
           <td>${randomMail}</td>
         </tr>`;
+
+      if (receivedEmails.length === numberOfMails) {
+        tableMail.innerHTML = containerHtml;
+      }
     })
 
     .finally(() => {
